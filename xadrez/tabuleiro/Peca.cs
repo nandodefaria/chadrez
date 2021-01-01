@@ -10,10 +10,14 @@
 
         public Peca(Tabuleiro tab, Cor cor)
         {
-            this.posicao = null;
+            posicao = null;
             this.tab = tab;
             this.cor = cor;
-            this.qntMovimentos = 0;
+            qntMovimentos = 0;
+        }
+        public void incrementarQntMovimentos()
+        {
+            qntMovimentos++;
         }
     }
 }
