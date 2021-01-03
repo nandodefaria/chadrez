@@ -66,9 +66,47 @@ namespace xadrez
             {
                 xeque = false;
             }
-            turno++;
-            mudaJogador();
+            if (testeXequeMate(adversaria(jogadorAtual)))
+            {
+                partidaTerminada = true;
+            }
+            else
+            {
+                turno++;
+                mudaJogador();
+            }           
 
+        }
+        public bool testeXequeMate(Cor cor)
+        {
+            if (!estaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach(Peca x in pecasEmJogo(cor))
+            {
+                bool[,] mat = x.movimentosPossiveis();
+
+                for(int l=0; l<tab.linhas; l++)
+                {
+                    for(int c=0; c<tab.colunas; c++)
+                    {
+                        if(mat[l, c])
+                        {
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(l, c);
+                            Peca pecaCapturada = executarMovimento(origem, destino);
+                            bool testeXeque = estaEmXeque(cor);
+                            desfazerMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
         public void validarPosicaoDeOrigem(Posicao pos)
         {

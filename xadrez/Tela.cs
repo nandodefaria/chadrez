@@ -15,7 +15,35 @@ namespace xadrez
             imprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.turno);
-            Console.WriteLine("Aguardando jogada das peças: " + partida.jogadorAtual + "s");
+            if (!partida.partidaTerminada)
+            {
+                Console.WriteLine("Aguardando jogada das peças: " + partida.jogadorAtual + "s");
+
+                if (partida.xeque)
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(partida.jogadorAtual + "s em XEQUE!");
+                    Console.ForegroundColor = aux;
+                }
+            }
+            else
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Vencedor: " + partida.jogadorAtual + "s.");
+                Console.ForegroundColor = aux;
+                Console.WriteLine();
+               /* Console.Write("Jogar novamente? (y/n):");
+                string reset = Console.ReadLine();
+                if(reset == "y")
+                {
+                
+                    partida.partidaTerminada = false;
+                    
+                }*/
+            }
         }
 
         public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
@@ -32,12 +60,7 @@ namespace xadrez
             imprimirConjunto(partida.pecasCapturadas(Cor.Preta));
             Console.ForegroundColor = aux;
             Console.WriteLine();
-            if (partida.xeque)
-            {               
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(partida.jogadorAtual + "s em XEQUE!");
-                Console.ForegroundColor = aux;
-            }
+           
         }
         public static void imprimirConjunto(HashSet<Peca> conjunto)
         {
