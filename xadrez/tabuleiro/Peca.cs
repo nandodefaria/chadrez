@@ -15,6 +15,10 @@
             this.cor = cor;
             this.qntMovimentos = 0;
         }
+        public void decrementarQntMovimentos()
+        {
+            qntMovimentos--;
+        }
         public void incrementarQntMovimentos()
         {
             qntMovimentos++;

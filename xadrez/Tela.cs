@@ -32,6 +32,12 @@ namespace xadrez
             imprimirConjunto(partida.pecasCapturadas(Cor.Preta));
             Console.ForegroundColor = aux;
             Console.WriteLine();
+            if (partida.xeque)
+            {               
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(partida.jogadorAtual + "s em XEQUE!");
+                Console.ForegroundColor = aux;
+            }
         }
         public static void imprimirConjunto(HashSet<Peca> conjunto)
         {
